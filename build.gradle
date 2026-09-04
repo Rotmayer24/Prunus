@@ -1,43 +1,58 @@
 plugins {
-    id 'eclipse'
-    id 'idea'
+    id 'java-library'
     id 'maven-publish'
-    id 'net.minecraftforge.gradle' version '[6.0.16,6.1)'
+    id 'net.neoforged.gradle.userdev' version '7.1.38'
 }
 
 version = '1.0.0'
 group = 'com.prunus'
 
-repositories {
-    maven { url = 'https://maven.minecraftforge.net/' }
-}
-
-minecraft {
-    mappings channel: 'official', version: '1.20.1'
-    
-    copyIdeResources = true
-
-    runs {
-        configureEach {
-            workingDirectory project.file('run')
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-            mods {
-                prunus {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        client {}
-        server {}
-    }
-}
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
+base {
+    archivesName = 'prunus'
+}
+
+runs {
+    configureEach {
+        systemProperty 'forge.logging.markers', 'REGISTRIES'
+        systemProperty 'forge.logging.console.level', 'debug'
+        workingDirectory project.layout.projectDirectory.dir('run').dir(name)
+        modSource project.sourceSets.main
+    }
+
+    client {}
+    server {
+        argument '--nogui'
+    }
+}
+
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.20.1-47.2.0'
+    implementation "net.neoforged:neoforge:21.1.235"
+}
+
+tasks.withType(ProcessResources).configureEach {
+    var replaceProperties = [
+            minecraft_version      : '1.21.1',
+            minecraft_version_range: '[1.21.1]',
+            neo_version            : '21.1.235',
+            loader_version_range   : '[1,)',
+            mod_id                 : 'prunus',
+            mod_name               : 'Prunus',
+            mod_license            : 'MIT',
+            mod_version            : '1.0.0',
+    ]
+    inputs.properties replaceProperties
+
+    filesMatching(['META-INF/neoforge.mods.toml']) {
+        expand replaceProperties
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
 }
 
 jar {
