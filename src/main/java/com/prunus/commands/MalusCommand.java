@@ -14,7 +14,7 @@ import net.minecraft.world.level.Level;
 
 public class MalusCommand {
     private static final ResourceKey<Registry<Level>> LEVEL_REGISTRY =
-        ResourceKey.createRegistryKey(new ResourceLocation("dimension"));
+        ResourceKey.createRegistryKey(ResourceLocation.parse("dimension"));
 
     public static void registerCommand(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(Commands.literal("malus")
@@ -38,7 +38,7 @@ public class MalusCommand {
             return;
         }
 
-        ResourceLocation dimLoc = new ResourceLocation(data.lastOverworldDimension);
+        ResourceLocation dimLoc = ResourceLocation.parse(data.lastOverworldDimension);
         ResourceKey<Level> dimKey = ResourceKey.create(LEVEL_REGISTRY, dimLoc);
         var targetLevel = player.getServer().getLevel(dimKey);
         if (targetLevel == null) {

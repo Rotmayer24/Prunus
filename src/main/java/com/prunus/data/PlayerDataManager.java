@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.UUID;
 
 public class PlayerDataManager {
-    private static final ResourceLocation POCKET_DIMENSION = new ResourceLocation("prunus", "pocket");
+    private static final ResourceLocation POCKET_DIMENSION = ResourceLocation.fromNamespaceAndPath("prunus", "pocket");
     private static final Map<UUID, PlayerData> playerDataMap = new HashMap<>();
 
     public static class PlayerData {

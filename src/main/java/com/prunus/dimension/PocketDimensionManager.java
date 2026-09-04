@@ -16,10 +16,10 @@ import java.util.UUID;
 
 public class PocketDimensionManager {
     private static final ResourceKey<Registry<Level>> LEVEL_REGISTRY =
-        ResourceKey.createRegistryKey(new ResourceLocation("dimension"));
+        ResourceKey.createRegistryKey(ResourceLocation.parse("dimension"));
 
     public static final ResourceKey<Level> POCKET_KEY =
-        ResourceKey.create(LEVEL_REGISTRY, new ResourceLocation(PrunusMod.MODID, "pocket"));
+        ResourceKey.create(LEVEL_REGISTRY, ResourceLocation.fromNamespaceAndPath(PrunusMod.MODID, "pocket"));
 
     private static BlockPos getZoneOrigin(UUID uuid) {
         int x = (int) (uuid.getMostSignificantBits() % 10000);
