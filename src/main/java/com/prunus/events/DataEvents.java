@@ -2,8 +2,8 @@ package com.prunus.events;
 
 import com.prunus.data.PlayerDataManager;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
 public class DataEvents {
     @SubscribeEvent

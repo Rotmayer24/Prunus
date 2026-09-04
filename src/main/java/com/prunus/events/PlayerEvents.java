@@ -4,9 +4,9 @@ import com.prunus.PrunusMod;
 import com.prunus.data.PlayerDataManager;
 import com.prunus.dimension.PocketDimensionManager;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
 public class PlayerEvents {
     @SubscribeEvent
@@ -18,9 +18,8 @@ public class PlayerEvents {
     }
 
     @SubscribeEvent
-    public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        if (event.phase != TickEvent.Phase.END) return;
-        if (!(event.player instanceof ServerPlayer player)) return;
+    public static void onPlayerTick(PlayerTickEvent.Post event) {
+        if (!(event.getEntity() instanceof ServerPlayer player)) return;
         if (!PlayerDataManager.isInPocketDimension(player)) return;
         if (player.getY() >= 0) return;
 

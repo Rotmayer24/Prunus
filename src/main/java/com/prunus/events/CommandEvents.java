@@ -3,9 +3,9 @@ package com.prunus.events;
 import com.prunus.commands.PrunusCommand;
 import com.prunus.commands.MalusCommand;
 import net.minecraft.commands.CommandSourceStack;
-import net.minecraftforge.event.ServerChatEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.event.RegisterCommandsEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.event.RegisterCommandsEvent;
+import net.neoforged.neoforge.event.ServerChatEvent;
 
 public class CommandEvents {
     @SubscribeEvent
