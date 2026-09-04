@@ -1,5 +1,6 @@
 package com.prunus.events;
 
+import com.prunus.PrunusMod;
 import com.prunus.commands.PrunusCommand;
 import com.prunus.commands.MalusCommand;
 import net.minecraft.commands.CommandSourceStack;
@@ -18,13 +19,14 @@ public class CommandEvents {
     public static void onChat(ServerChatEvent event) {
         String msg = event.getMessage().getString().trim();
         String lower = msg.toLowerCase();
-        if (lower.equals("prunus") || lower.startsWith("prunus ")
-                || lower.equals("malus") || lower.startsWith("malus ")) {
+        if (lower.equals("prunus") || lower.equals("malus")) {
             event.setCanceled(true);
             try {
                 CommandSourceStack source = event.getPlayer().createCommandSourceStack();
                 event.getPlayer().getServer().getCommands().getDispatcher().execute(msg, source);
-            } catch (Exception ignored) {}
+            } catch (Exception e) {
+                PrunusMod.LOGGER.error("Command execution failed: {}", msg, e);
+            }
         }
     }
 }

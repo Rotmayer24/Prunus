@@ -38,7 +38,13 @@ public class MalusCommand {
             return;
         }
 
-        ResourceLocation dimLoc = ResourceLocation.parse(data.lastOverworldDimension);
+        ResourceLocation dimLoc;
+        try {
+            dimLoc = ResourceLocation.parse(data.lastOverworldDimension);
+        } catch (Exception e) {
+            player.sendSystemMessage(Component.literal("Invalid dimension data!").withStyle(ChatFormatting.RED));
+            return;
+        }
         ResourceKey<Level> dimKey = ResourceKey.create(LEVEL_REGISTRY, dimLoc);
         var targetLevel = player.getServer().getLevel(dimKey);
         if (targetLevel == null) {

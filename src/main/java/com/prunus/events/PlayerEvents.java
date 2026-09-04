@@ -18,6 +18,13 @@ public class PlayerEvents {
     }
 
     @SubscribeEvent
+    public static void onPlayerLogout(PlayerEvent.PlayerLoggedOutEvent event) {
+        if (event.getEntity() instanceof ServerPlayer player) {
+            PlayerDataManager.removePlayerData(player.getUUID());
+        }
+    }
+
+    @SubscribeEvent
     public static void onPlayerTick(PlayerTickEvent.Post event) {
         if (!(event.getEntity() instanceof ServerPlayer player)) return;
         if (!PlayerDataManager.isInPocketDimension(player)) return;
