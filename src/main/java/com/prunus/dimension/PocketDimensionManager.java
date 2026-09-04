@@ -22,12 +22,13 @@ public class PocketDimensionManager {
         ResourceKey.create(LEVEL_REGISTRY, ResourceLocation.fromNamespaceAndPath(PrunusMod.MODID, "pocket"));
 
     private static BlockPos getZoneOrigin(UUID uuid) {
-        int x = (int) (uuid.getMostSignificantBits() % 10000);
-        int z = (int) (uuid.getLeastSignificantBits() % 10000);
+        int x = (int) Math.floorMod(uuid.getMostSignificantBits(), 10000);
+        int z = (int) Math.floorMod(uuid.getLeastSignificantBits(), 10000);
         return new BlockPos(x, 64, z);
     }
 
     public static boolean teleportToPocket(ServerPlayer player) {
+        if (player.getServer() == null) return false;
         ServerLevel level = player.getServer().getLevel(POCKET_KEY);
         if (level == null) {
             player.sendSystemMessage(Component.literal("Pocket dimension not found!").withStyle(ChatFormatting.RED));
