@@ -19,9 +19,9 @@ public class KeyBindings {
     @SubscribeEvent
     public static void onRegisterKeyMappings(RegisterKeyMappingsEvent event) {
         togglePocketKey = new KeyMapping(
-            "key.prunus.toggle_pocket",
+            "Toggle Prunus",
             GLFW.GLFW_KEY_G,
-            "key.categories.prunus"
+            "Prunus"
         );
         event.register(togglePocketKey);
     }
