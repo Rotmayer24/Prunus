@@ -1,6 +1,6 @@
 # Prunus - Personal Pocket Dimensions Mod
 
-Minecraft Forge 1.20.1 mod for personal pocket dimensions.
+Minecraft NeoForge 1.21.1 mod for personal pocket dimensions.
 
 ## Features
 
@@ -20,11 +20,12 @@ Minecraft Forge 1.20.1 mod for personal pocket dimensions.
 
 ## Installation
 
-1. Install Minecraft Forge 1.20.1
+1. Install Minecraft NeoForge 1.21.1
 2. Copy `.jar` file to `mods` folder
 3. Launch Minecraft
 
 ## Requirements
 
-- Minecraft 1.20.1
-- Forge 47.2.0+
+- Minecraft 1.21.1
+- NeoForge 21.1.0+
+- Java 21
