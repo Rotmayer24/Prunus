@@ -6,7 +6,6 @@ import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -26,13 +25,10 @@ public class KeyBindings {
         event.register(togglePocketKey);
     }
 
-    public static void registerForgeEvents() {
-        MinecraftForge.EVENT_BUS.register(new TickHandler());
-    }
-
+    @Mod.EventBusSubscriber(modid = PrunusMod.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.FORGE)
     public static class TickHandler {
         @SubscribeEvent
-        public void onClientTick(TickEvent.ClientTickEvent event) {
+        public static void onClientTick(TickEvent.ClientTickEvent event) {
             if (event.phase != TickEvent.Phase.END) return;
 
             Minecraft mc = Minecraft.getInstance();
